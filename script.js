@@ -370,19 +370,19 @@ function analyzeStats(pet, level, currentStats, expectedStats) {
                     growthRate = 0;
                 }
                 
-                if (growthRate >= 1.3) {
+                if (growthRate >= 1.4) {
                     rating = '頂級';
                     ratingClass = 'rating-excellent';
                     score = 100;
-                } else if (growthRate >= 1.1) {
+                } else if (growthRate >= 1.2) {
                     rating = '優秀';
                     ratingClass = 'rating-excellent';
                     score = 85;
-                } else if (growthRate >= 0.9) {
+                } else if (growthRate >= 1.0) {
                     rating = '良好';
                     ratingClass = 'rating-good';
                     score = 70;
-                } else if (growthRate >= 0.7) {
+                } else if (growthRate >= 0.85) {
                     rating = '普通';
                     ratingClass = 'rating-average';
                     score = 55;
@@ -419,19 +419,19 @@ function analyzeStats(pet, level, currentStats, expectedStats) {
     const averageScore = validStats > 0 ? totalScore / validStats : 0;
     let overallRating, overallClass, description;
     
-    if (averageScore >= 90) {
+    if (averageScore >= 95) {
         overallRating = '神級寵物';
         overallClass = 'excellent';
         description = '恭喜！這是一隻極品寵物，屬性成長非常優秀，值得大力培養！';
-    } else if (averageScore >= 75) {
+    } else if (averageScore >= 80) {
         overallRating = '優質寵物';
         overallClass = 'excellent';
         description = '這是一隻品質很好的寵物，屬性成長超出平均水準，推薦繼續培養。';
-    } else if (averageScore >= 60) {
+    } else if (averageScore >= 65) {
         overallRating = '普通寵物';
         overallClass = 'good';
         description = '這隻寵物的屬性成長中規中矩，可以作為過渡期使用。';
-    } else if (averageScore >= 45) {
+    } else if (averageScore >= 50) {
         overallRating = '一般寵物';
         overallClass = 'average';
         description = '這隻寵物的成長略低於平均，建議考慮重新培養或尋找更好的替代。';
