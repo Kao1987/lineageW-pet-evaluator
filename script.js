@@ -78,6 +78,40 @@ const statNames = {
     hp: '體力'
 };
 
+// 現代通知系統
+function showNotification(message, type = 'warning') {
+    // 創建通知元素
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `
+        <span>${message}</span>
+        <button class="notification-close" aria-label="關閉通知">&times;</button>
+    `;
+    
+    // 添加到頁面
+    document.body.appendChild(notification);
+    
+    // 自動關閉
+    const autoCloseTimer = setTimeout(() => {
+        closeNotification(notification);
+    }, 4000);
+    
+    // 點擊關閉
+    notification.querySelector('.notification-close').addEventListener('click', () => {
+        clearTimeout(autoCloseTimer);
+        closeNotification(notification);
+    });
+}
+
+function closeNotification(notification) {
+    notification.classList.add('fade-out');
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.parentNode.removeChild(notification);
+        }
+    }, 300);
+}
+
 // 計算角色加成
 function calculateCharacterBonus(statName, value) {
     switch(statName) {
@@ -96,6 +130,19 @@ function calculateCharacterBonus(statName, value) {
     }
 }
 
+// 防抖函數
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
 // 全域變數
 let selectedPet = null;
 
@@ -104,6 +151,11 @@ const petCards = document.querySelectorAll('.pet-card');
 const calculateBtn = document.getElementById('calculate');
 const resultsSection = document.getElementById('results');
 const levelInput = document.getElementById('level');
+const helpBtn = document.getElementById('help-btn');
+const helpModal = document.getElementById('help-modal');
+const closeBtn = document.querySelector('.close');
+const helpTabBtns = document.querySelectorAll('.help-tab-btn');
+const helpTabContents = document.querySelectorAll('.help-tab-content');
 
 // 事件監聽器
 document.addEventListener('DOMContentLoaded', function() {
@@ -124,8 +176,59 @@ document.addEventListener('DOMContentLoaded', function() {
     // 計算按鈕
     calculateBtn.addEventListener('click', calculatePetStats);
     
-    // 等級輸入變化時更新基礎值
-    levelInput.addEventListener('input', updateBaseStatsDisplay);
+    // 等級輸入變化時更新基礎值 - 使用防抖
+    const debouncedUpdateBaseStats = debounce(updateBaseStatsDisplay, 300);
+    levelInput.addEventListener('input', debouncedUpdateBaseStats);
+    
+    // 說明按鈕事件
+    if (helpBtn) {
+        helpBtn.addEventListener('click', function() {
+            helpModal.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // 防止背景滾動
+        });
+    }
+    
+    // 關閉按鈕事件
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function() {
+            helpModal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // 恢復背景滾動
+        });
+    }
+    
+    // 點擊視窗外部關閉
+    window.addEventListener('click', function(event) {
+        if (event.target === helpModal) {
+            helpModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    });
+    
+    // ESC鍵關閉視窗
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && helpModal && helpModal.style.display === 'block') {
+            helpModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    });
+    
+    // 說明標籤切換
+    helpTabBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const targetTab = this.dataset.tab;
+            
+            // 移除所有active狀態
+            helpTabBtns.forEach(b => b.classList.remove('active'));
+            helpTabContents.forEach(content => content.classList.remove('active'));
+            
+            // 添加當前標籤的active狀態
+            this.classList.add('active');
+            const targetContent = document.getElementById(targetTab);
+            if (targetContent) {
+                targetContent.classList.add('active');
+            }
+        });
+    });
 });
 
 // 更新基礎屬性顯示
@@ -178,7 +281,7 @@ function calculateExpectedStats(pet, level) {
 // 計算寵物屬性
 function calculatePetStats() {
     if (!selectedPet) {
-        alert('請先選擇一隻寵物');
+        showNotification('請先選擇一隻寵物', 'warning');
         return;
     }
     
@@ -193,12 +296,25 @@ function calculatePetStats() {
     
     // 驗證輸入
     if (level < 1 || level > 100) {
-        alert('等級必須在 1-100 之間');
+        showNotification('等級必須在 1-100 之間', 'error');
         return;
     }
     
+    // 添加屬性值合理範圍檢查
+    const maxReasonableValue = level * 10; // 設定合理的上限
+    for (const [stat, value] of Object.entries(currentStats)) {
+        if (stat !== 'aggressiveness' && value > maxReasonableValue) {
+            showNotification(`${statNames[stat]}數值過高，請檢查是否正確（建議不超過${maxReasonableValue}）`, 'warning');
+            return;
+        }
+        if (value < 0) {
+            showNotification(`${statNames[stat]}不能為負數`, 'error');
+            return;
+        }
+    }
+    
     if (Object.values(currentStats).filter((val, index) => index !== 3).every(val => val === 0)) {
-        alert('請輸入至少一個屬性值（積極性除外）');
+        showNotification('請輸入至少一個屬性值（積極性除外）', 'warning');
         return;
     }
     
@@ -207,6 +323,7 @@ function calculatePetStats() {
     const analysis = analyzeStats(pet, level, currentStats, expectedStats);
     
     displayResults(pet, level, currentStats, expectedStats, analysis);
+    showNotification('計算完成！', 'success');
 }
 
 // 分析屬性
