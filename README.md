@@ -192,6 +192,11 @@ LineageW-Pet-Evaluator/
 
 ## 📝 更新日誌
 
+### V2.1
+- **比較欄位增加期望值**
+- **增加GOOGLE Analytics 4 流量分析**
+
+
 ### v2.0.0 (最新版本)
 - 🎨 **全新One Dark Pro主題**：現代化暗黑風格設計
 - 🖼️ **寵物圖片系統**：真實寵物圖片替代emoji
