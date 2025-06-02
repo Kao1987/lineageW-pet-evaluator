@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天堂W 寵物屬性計算器</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐾 天堂W 寵物屬性計算器</h1>
+            <p class="subtitle">計算您的寵物成長潛力與評價</p>
+        </header>
+
+        <div class="main-content">
+            <!-- 寵物選擇區 -->
+            <section class="pet-selection" role="radiogroup" aria-labelledby="pet-selection-title">
+                <h2 id="pet-selection-title">選擇寵物</h2>
+                <div class="pet-grid">
+                    <div class="pet-card" data-pet="wolf">
+                        <div class="pet-icon">🐺</div>
+                        <h3>狼</h3>
+                        <p>主屬：體力(HP)</p>
+                    </div>
+                    <div class="pet-card" data-pet="dog">
+                        <div class="pet-icon">🐕</div>
+                        <h3>杜賓狗</h3>
+                        <p>主屬：忠誠心(命中)</p>
+                    </div>
+                    <div class="pet-card" data-pet="shepherd">
+                        <div class="pet-icon">🐕‍🦺</div>
+                        <h3>牧羊犬</h3>
+                        <p>主屬：忍耐力(物防)</p>
+                    </div>
+                    <div class="pet-card" data-pet="hound">
+                        <div class="pet-icon">🐶</div>
+                        <h3>小獵犬</h3>
+                        <p>主屬：速度(迴避)</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 輸入區 -->
+            <section class="input-section">
+                <div class="input-group">
+                    <label for="level">寵物等級</label>
+                    <input type="number" id="level" min="1" max="100" value="1">
+                </div>
+
+                <div class="stats-input">
+                    <h3>當前屬性值</h3>
+                    <div class="warning">
+                        ⚠️ 請記得扣除技能加成的屬性點數
+                    </div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-input">
+                            <label for="endurance">忍耐力 (物防)</label>
+                            <input type="number" id="endurance" min="0" value="0">
+                        </div>
+                        <div class="stat-input">
+                            <label for="loyalty">忠誠心 (命中)</label>
+                            <input type="number" id="loyalty" min="0" value="0">
+                        </div>
+                        <div class="stat-input">
+                            <label for="speed">速度</label>
+                            <input type="number" id="speed" min="0" value="0">
+                        </div>
+                        <div class="stat-input">
+                            <label for="aggressiveness">積極性</label>
+                            <input type="number" id="aggressiveness" min="0" value="3" disabled>
+                            <small>※積極性固定為3，不會升級</small>
+                        </div>
+                        <div class="stat-input">
+                            <label for="hp">體力 (HP)</label>
+                            <input type="number" id="hp" min="0" value="0">
+                        </div>
+                    </div>
+                </div>
+
+                <button id="calculate" class="calculate-btn">🧮 計算屬性評價</button>
+            </section>
+
+            <!-- 結果顯示區 -->
+            <section class="result-section" id="results" style="display: none;">
+                <h2>計算結果</h2>
+                
+                <div class="pet-info">
+                    <div class="selected-pet-display">
+                        <span class="pet-emoji"></span>
+                        <span class="pet-name"></span>
+                        <span class="pet-level"></span>
+                    </div>
+                </div>
+
+                <div class="stats-comparison">
+                    <div class="comparison-grid">
+                        <div class="stat-row header">
+                            <div>屬性</div>
+                            <div>當前值</div>
+                            <div>基礎值</div>
+                            <div>成長值</div>
+                            <div>角色加成</div>
+                            <div>評價</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="overall-rating">
+                    <h3>整體評價</h3>
+                    <div class="rating-display">
+                        <span class="rating-badge"></span>
+                        <p class="rating-description"></p>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <footer class="footer">
+            <p>Created by <strong>Orien</strong></p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
