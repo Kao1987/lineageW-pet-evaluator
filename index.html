@@ -76,7 +76,11 @@
                 </div>
 
                 <div class="stats-input">
-                    <h3>當前屬性值</h3>
+                    <div class="stats-header">
+                        <h3>當前屬性值</h3>
+                        <button id="help-btn" class="help-btn">❓ 使用說明</button>
+                    </div>
+
                     <div class="warning">
                         ⚠️ 請記得扣除技能加成的屬性點數
                     </div>
@@ -113,7 +117,6 @@
 
                 <div class="button-group">
                     <button id="calculate" class="calculate-btn">🧮 計算屬性評價</button>
-                    <button id="help-btn" class="help-btn">❓ 使用說明</button>
                 </div>
             </section>
 
@@ -315,8 +318,22 @@
         </div>
 
         <footer class="footer">
-            <p>Created by <strong>Orien</strong></p>
-            <p>Last Update: 2025/06/02 V2.1</p>
+            <!-- 📝 意見回饋表單（上方） -->
+            <div class="feedback-section">
+                <h3>📝與我聯繫</h3>
+                <p>有任何建議或意見嗎？歡迎填寫回饋表單！</p>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfgqhDqccI-FwdwKCUL6EW7TqyJpCisUarKeyUu-Fv4BKidIA/viewform" 
+                    target="_blank" 
+                    class="feedback-link">
+                    🔗 點擊前往意見回饋表單
+                </a>
+            </div>
+            
+            <!-- 👤 作者信息（下方） -->
+            <div class="footer-info">
+                <p>Created by <strong>Orion</strong></p>
+                <p>Last Update: 2025/06/02 V2.2</p>
+            </div>
         </footer>
     </div>
 

@@ -305,6 +305,13 @@ header h1 {
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     border: 1px solid #3e4451;
 }
+.stats-header {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin-bottom: 10px;
+}
 
 .stat-row {
     display: grid;
@@ -421,15 +428,233 @@ header h1 {
 
 /* Footer */
 .footer {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #5c6ac4 100%);
+    color: white;
+    margin-top: 60px;
+    padding: 0;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 
+        0 -10px 40px rgba(102, 126, 234, 0.4),
+        0 15px 50px rgba(118, 75, 162, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Footer裝飾元素 */
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #ffd700, #ff6b6b, #4ecdc4, #45b7d1, #ffd700);
+    background-size: 200% 100%;
+    animation: rainbowGlow 3s ease-in-out infinite;
+}
+
+@keyframes rainbowGlow {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* 意見回饋表單樣式 */
+.feedback-section {
+    padding: 40px 30px 30px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
     text-align: center;
-    margin-top: 40px;
-    padding: 20px;
-    color: #abb2bf;
-    font-size: 1rem;
+}
+
+.feedback-section::before {
+    content: '✨';
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    font-size: 24px;
+    opacity: 0.7;
+    animation: sparkle 2s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+    0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.7; }
+    50% { transform: scale(1.2) rotate(180deg); opacity: 1; }
+}
+
+.feedback-section h3 {
+    margin: 0 0 15px 0;
+    color: #ffd700;
+    font-size: 22px;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.feedback-section p {
+    margin: 0 0 25px 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 16px;
+    line-height: 1.6;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.feedback-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4a 50%, #f9ca24 100%);
+    color: #2c3e50;
+    text-decoration: none;
+    padding: 16px 32px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 16px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 
+        0 8px 25px rgba(255, 215, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.feedback-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.6s;
+}
+
+.feedback-link:hover::before {
+    left: 100%;
+}
+
+.feedback-link:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 
+        0 12px 35px rgba(255, 215, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    background: linear-gradient(135deg, #ffed4a 0%, #ffd700 50%, #f39c12 100%);
+}
+
+.feedback-link:active {
+    transform: translateY(-1px) scale(1.02);
+}
+
+/* Footer底部信息區域 */
+.footer-info {
+    padding: 30px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.footer p {
+    margin: 8px 0;
+    font-size: 15px;
+    font-weight: 500;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    opacity: 0.9;
 }
 
 .footer strong {
-    color: #e5c07b;
+    color: #ffd700;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    position: relative;
+    display: inline-block;
+}
+
+.footer strong::after {
+    content: '⭐';
+    margin-left: 8px;
+    font-size: 14px;
+    animation: twinkle 1.5s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.7; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.1); }
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .feedback-section {
+        padding: 30px 20px 25px;
+    }
+    
+    .feedback-section h3 {
+        font-size: 20px;
+    }
+    
+    .feedback-section p {
+        font-size: 15px;
+    }
+    
+    .feedback-link {
+        width: 100%;
+        justify-content: center;
+        padding: 18px 24px;
+        font-size: 15px;
+    }
+    
+    .footer-info {
+        padding: 25px 20px;
+    }
+    
+    .footer p {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer {
+        margin-top: 40px;
+        border-radius: 15px 15px 0 0;
+    }
+    
+    .feedback-section {
+        padding: 25px 15px 20px;
+    }
+    
+    .feedback-section h3 {
+        font-size: 18px;
+    }
+    
+    .feedback-section::before {
+        right: 15px;
+        font-size: 20px;
+    }
+    
+    .footer-info {
+        padding: 20px 15px;
+    }
+}
+
+/* 光效動畫 */
+@keyframes footerGlow {
+    0%, 100% {
+        box-shadow: 
+            0 -10px 40px rgba(102, 126, 234, 0.4),
+            0 15px 50px rgba(118, 75, 162, 0.3);
+    }
+    50% {
+        box-shadow: 
+            0 -15px 50px rgba(102, 126, 234, 0.6),
+            0 20px 60px rgba(118, 75, 162, 0.5);
+    }
+}
+
+.footer:hover {
+    animation: footerGlow 2s ease-in-out infinite;
 }
 
 /* 響應式設計 */
@@ -805,50 +1030,6 @@ header h1 {
 .bonus-info li {
     margin-bottom: 8px;
     line-height: 1.6;
-}
-
-/* 響應式設計 - 彈出視窗 */
-@media (max-width: 768px) {
-    .modal-content {
-        width: 95%;
-        margin: 10% auto;
-        max-height: 85vh;
-    }
-    
-    .help-tabs {
-        flex-direction: column;
-    }
-    
-    .help-tab-btn {
-        text-align: left;
-        border-bottom: none;
-        border-left: 3px solid transparent;
-    }
-    
-    .help-tab-btn.active {
-        border-left-color: #667eea;
-        border-bottom-color: transparent;
-        background: rgba(102, 126, 234, 0.1);
-    }
-    
-    .button-group {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .button-group button {
-        width: 100%;
-        max-width: 300px;
-    }
-    
-    .base-table {
-        font-size: 0.9rem;
-    }
-    
-    .base-table th,
-    .base-table td {
-        padding: 8px 10px;
-    }
 }
 
 /* 現代通知系統樣式 */
