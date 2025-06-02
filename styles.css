@@ -308,7 +308,7 @@ header h1 {
 
 .stat-row {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     padding: 15px;
     border-bottom: 1px solid #3e4451;
     align-items: center;

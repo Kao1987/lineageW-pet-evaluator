@@ -478,6 +478,7 @@ function displayResults(pet, level, currentStats, expectedStats, analysis) {
             <div>當前值</div>
             <div>基礎值</div>
             <div>成長值</div>
+            <div>期望值</div>
             <div>角色加成</div>
             <div>評價</div>
         </div>
@@ -496,6 +497,7 @@ function displayResults(pet, level, currentStats, expectedStats, analysis) {
             <div>${data.current}</div>
             <div>${data.base}</div>
             <div>+${data.growth}</div>
+            <div>${formatNumber(data.expected)}</div>
             <div>${data.characterBonus}</div>
             <div><span class="${data.ratingClass}">${data.rating}</span></div>
         `;
