@@ -3,6 +3,7 @@ const petData = {
     wolf: {
         name: '狼',
         emoji: '🐺',
+        image: 'wolf.png',
         mainStat: 'hp',
         baseStats: {
             endurance: 6,    // 忍耐力
@@ -15,6 +16,7 @@ const petData = {
     dog: {
         name: '杜賓狗',
         emoji: '🐕',
+        image: 'dubin.png',
         mainStat: 'loyalty',
         baseStats: {
             endurance: 6,
@@ -27,6 +29,7 @@ const petData = {
     shepherd: {
         name: '牧羊犬',
         emoji: '🐕‍🦺',
+        image: 'sheepdog.png',
         mainStat: 'endurance',
         baseStats: {
             endurance: 14,
@@ -39,6 +42,7 @@ const petData = {
     hound: {
         name: '小獵犬',
         emoji: '🐶',
+        image: 'beagle.png',
         mainStat: 'speed',
         baseStats: {
             endurance: 6,
@@ -265,14 +269,15 @@ function calculateExpectedStats(pet, level) {
         const isMainStat = stat === pet.mainStat;
         const rates = isMainStat ? upgradeRates.main : upgradeRates.sub;
         
-        let expectedIncrease = 0;
-        for (let i = 0; i < upgradesNeeded; i++) {
-            rates.forEach(rate => {
-                expectedIncrease += rate.level * rate.rate;
-            });
-        }
+        // 修正：計算每次升級的期望值
+        let expectedPerLevel = 0;
+        rates.forEach(rate => {
+            expectedPerLevel += rate.level * rate.rate;
+        });
         
-        stats[stat] += expectedIncrease;
+        // 總期望增長 = 每次升級期望值 × 升級次數
+        const totalExpectedIncrease = expectedPerLevel * upgradesNeeded;
+        stats[stat] += totalExpectedIncrease;
     });
     
     return stats;
@@ -295,17 +300,23 @@ function calculatePetStats() {
     };
     
     // 驗證輸入
-    if (level < 1 || level > 100) {
-        showNotification('等級必須在 1-100 之間', 'error');
+    if (level < 1 || level > 15) {
+        showNotification('等級必須在 1-15 之間', 'error');
         return;
     }
     
-    // 添加屬性值合理範圍檢查
-    const maxReasonableValue = level * 10; // 設定合理的上限
+    // 修正：調整屬性值合理範圍檢查，根據預期值動態計算
+    const pet = petData[selectedPet];
+    const expectedStats = calculateExpectedStats(pet, level);
+    
     for (const [stat, value] of Object.entries(currentStats)) {
-        if (stat !== 'aggressiveness' && value > maxReasonableValue) {
-            showNotification(`${statNames[stat]}數值過高，請檢查是否正確（建議不超過${maxReasonableValue}）`, 'warning');
-            return;
+        if (stat !== 'aggressiveness' && value > 0) {
+            // 設定合理上限為預期值的1.5倍（允許優質寵物）
+            const maxReasonableValue = Math.ceil(expectedStats[stat] * 1.5);
+            if (value > maxReasonableValue) {
+                showNotification(`${statNames[stat]}數值過高，請檢查是否正確（建議不超過${maxReasonableValue}）`, 'warning');
+                return;
+            }
         }
         if (value < 0) {
             showNotification(`${statNames[stat]}不能為負數`, 'error');
@@ -318,8 +329,6 @@ function calculatePetStats() {
         return;
     }
     
-    const pet = petData[selectedPet];
-    const expectedStats = calculateExpectedStats(pet, level);
     const analysis = analyzeStats(pet, level, currentStats, expectedStats);
     
     displayResults(pet, level, currentStats, expectedStats, analysis);
@@ -347,9 +356,19 @@ function analyzeStats(pet, level, currentStats, expectedStats) {
                 ratingClass = 'rating-good';
                 score = 70; // 給予中等分數，但不影響平均
             } else {
-                // 計算成長率 (相對於預期值)
-                const growthRate = expectedValue > baseValue ? 
-                    (currentValue - baseValue) / (expectedValue - baseValue) : 1;
+                // 修正：計算成長率 (相對於預期值)，防止除零錯誤
+                let growthRate;
+                if (expectedValue > baseValue) {
+                    growthRate = (currentValue - baseValue) / (expectedValue - baseValue);
+                } else {
+                    // 如果預期值等於基礎值（等級1的情況），直接比較當前值與基礎值
+                    growthRate = currentValue >= baseValue ? 1 : 0.5;
+                }
+                
+                // 防止負成長率異常情況
+                if (growthRate < 0) {
+                    growthRate = 0;
+                }
                 
                 if (growthRate >= 1.3) {
                     rating = '頂級';
@@ -435,8 +454,19 @@ function analyzeStats(pet, level, currentStats, expectedStats) {
 
 // 顯示結果
 function displayResults(pet, level, currentStats, expectedStats, analysis) {
-    // 顯示寵物資訊
-    document.querySelector('.pet-emoji').textContent = pet.emoji;
+    // 顯示寵物資訊 - 使用圖片替代emoji
+    const petEmojiElement = document.querySelector('.pet-emoji');
+    if (petEmojiElement) {
+        // 如果存在舊的圖片或文字，先清除
+        petEmojiElement.innerHTML = '';
+        // 創建圖片元素
+        const petImg = document.createElement('img');
+        petImg.src = pet.image;
+        petImg.alt = pet.name;
+        petImg.className = 'pet-image';
+        petEmojiElement.appendChild(petImg);
+    }
+    
     document.querySelector('.pet-name').textContent = pet.name;
     document.querySelector('.pet-level').textContent = `Lv.${level}`;
     
@@ -489,4 +519,4 @@ function displayResults(pet, level, currentStats, expectedStats, analysis) {
 // 工具函數：格式化數字
 function formatNumber(num) {
     return Math.round(num * 10) / 10;
-} 
+}

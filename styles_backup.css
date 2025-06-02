@@ -91,21 +91,8 @@ header h1 {
 }
 
 .pet-icon {
-    width: 80px;
-    height: 80px;
+    font-size: 3rem;
     margin-bottom: 10px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid rgba(255, 255, 255, 0.2);
-    transition: all 0.3s ease;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.pet-card:hover .pet-icon {
-    border-color: rgba(255, 255, 255, 0.5);
-    transform: scale(1.05);
 }
 
 .pet-card h3 {
@@ -276,16 +263,6 @@ header h1 {
     margin-right: 15px;
 }
 
-.pet-image {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 15px;
-    vertical-align: middle;
-    border: 2px solid rgba(97, 218, 251, 0.3);
-}
-
 .pet-name {
     font-size: 1.5rem;
     font-weight: 600;
@@ -445,16 +422,6 @@ header h1 {
     .pet-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 15px;
-    }
-    
-    .pet-icon {
-        width: 60px;
-        height: 60px;
-    }
-    
-    .pet-image {
-        width: 40px;
-        height: 40px;
     }
     
     .stats-grid {

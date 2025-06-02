@@ -37,22 +37,22 @@
                 <h2 id="pet-selection-title">選擇寵物</h2>
                 <div class="pet-grid">
                     <div class="pet-card" data-pet="wolf">
-                        <div class="pet-icon">🐺</div>
+                        <img src="wolf.png" alt="狼" class="pet-icon">
                         <h3>狼</h3>
                         <p>主屬：體力(HP)</p>
                     </div>
                     <div class="pet-card" data-pet="dog">
-                        <div class="pet-icon">🐕</div>
+                        <img src="dubin.png" alt="杜賓狗" class="pet-icon">
                         <h3>杜賓狗</h3>
                         <p>主屬：忠誠心(命中)</p>
                     </div>
                     <div class="pet-card" data-pet="shepherd">
-                        <div class="pet-icon">🐕‍🦺</div>
+                        <img src="sheepdog.png" alt="牧羊犬" class="pet-icon">
                         <h3>牧羊犬</h3>
                         <p>主屬：忍耐力(物防)</p>
                     </div>
                     <div class="pet-card" data-pet="hound">
-                        <div class="pet-icon">🐶</div>
+                        <img src="beagle.png" alt="小獵犬" class="pet-icon">
                         <h3>小獵犬</h3>
                         <p>主屬：速度(迴避)</p>
                     </div>
@@ -63,7 +63,7 @@
             <section class="input-section">
                 <div class="input-group">
                     <label for="level">寵物等級</label>
-                    <input type="number" id="level" min="1" max="100" value="1">
+                    <input type="number" id="level" min="1" max="15" value="1">
                 </div>
 
                 <div class="stats-input">
@@ -143,11 +143,11 @@
             </section>
 
             <!-- 彈出式說明視窗 -->
-            <div id="help-modal" class="modal">
+            <div id="help-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h2>🐾 使用說明</h2>
-                        <span class="close">&times;</span>
+                        <h2 id="modal-title">🐾 使用說明</h2>
+                        <span class="close" aria-label="關閉說明視窗">&times;</span>
                     </div>
                     <div class="modal-body">
                         <!-- 標籤按鈕 -->
@@ -167,7 +167,7 @@
                                 </div>
                                 <div class="step-item">
                                     <span class="step-num">2</span>
-                                    <div>輸入寵物等級（1-100）</div>
+                                    <div>輸入寵物等級（1-15）</div>
                                 </div>
                                 <div class="step-item">
                                     <span class="step-num">3</span>
@@ -189,28 +189,28 @@
                                     <th>體力</th>
                                 </tr>
                                 <tr>
-                                    <td>🐺 狼</td>
+                                    <td><img src="wolf.png" alt="狼" style="width: 20px; height: 20px; border-radius: 50%; margin-right: 5px; vertical-align: middle;"> 狼</td>
                                     <td>6</td>
                                     <td>6</td>
                                     <td>6</td>
                                     <td><strong>14</strong></td>
                                 </tr>
                                 <tr>
-                                    <td>🐕 杜賓狗</td>
+                                    <td><img src="dubin.png" alt="杜賓狗" style="width: 20px; height: 20px; border-radius: 50%; margin-right: 5px; vertical-align: middle;"> 杜賓狗</td>
                                     <td>6</td>
                                     <td><strong>14</strong></td>
                                     <td>6</td>
                                     <td>6</td>
                                 </tr>
                                 <tr>
-                                    <td>🐕‍🦺 牧羊犬</td>
+                                    <td><img src="sheepdog.png" alt="牧羊犬" style="width: 20px; height: 20px; border-radius: 50%; margin-right: 5px; vertical-align: middle;"> 牧羊犬</td>
                                     <td><strong>14</strong></td>
                                     <td>6</td>
                                     <td>6</td>
                                     <td>6</td>
                                 </tr>
                                 <tr>
-                                    <td>🐶 小獵犬</td>
+                                    <td><img src="beagle.png" alt="小獵犬" style="width: 20px; height: 20px; border-radius: 50%; margin-right: 5px; vertical-align: middle;"> 小獵犬</td>
                                     <td>6</td>
                                     <td>6</td>
                                     <td><strong>14</strong></td>
