@@ -3,8 +3,9 @@
 > 一個專為天堂W設計的現代化寵物屬性計算與評價工具，採用One Dark Pro暗黑主題，幫助玩家精準評估寵物成長潛力。
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Version](https://img.shields.io/badge/version-2.0.0-green.svg)
+![Version](https://img.shields.io/badge/version-2.1.0-green.svg)
 ![Status](https://img.shields.io/badge/status-stable-brightgreen.svg)
+![Tech](https://img.shields.io/badge/tech-Vanilla%20JS-yellow.svg)
 
 ## ✨ 功能特色
 
@@ -20,24 +21,25 @@
 - 🔔 **現代通知系統**：替代傳統alert的美觀提示
 - 📖 **分頁式說明**：詳細的使用說明和計算邏輯
 - 🌐 **無需安裝**：純前端應用，開啟即用
+- 📊 **Google Analytics 4**：流量分析與用戶行為追蹤
 
 ## 🚀 快速開始
 
 ### 本地運行
 ```bash
 # 克隆專案
-git clone [repository-url]
+git clone https://github.com/your-username/LineageW-Pet-Evaluator.git
 cd LineageW-Pet-Evaluator
 
-# 啟動本地伺服器（可選）
+# 方式一：啟動本地伺服器（推薦）
 python3 -m http.server 8000
 
-# 或直接開啟 index.html
+# 方式二：直接開啟檔案
 open index.html
 ```
 
 ### 線上使用
-直接開啟 `index.html` 檔案即可在瀏覽器中使用。
+直接開啟 `index.html` 檔案即可在瀏覽器中使用，無需額外依賴。
 
 ## 📋 使用指南
 
@@ -134,47 +136,94 @@ open index.html
 ## 🛠️ 技術架構
 
 ### 前端技術棧
-- **HTML5**：語義化標籤結構
+- **HTML5**：
+  - 語義化標籤結構
+  - ARIA 無障礙設計
+  - SEO 優化（Meta tags、Open Graph）
+  - PWA 相容性支援
 - **CSS3**：
-  - Flexbox & Grid 佈局
-  - CSS變數與漸變色彩
+  - CSS Grid & Flexbox 佈局系統
+  - CSS 自定義屬性（變數）
+  - 漸變色彩與動畫效果
   - 響應式媒體查詢
-  - 動畫與過渡效果
+  - 現代化暗黑主題設計
 - **JavaScript ES6+**：
-  - 模組化程式設計
-  - 事件委託與防抖
-  - 動態DOM操作
+  - 模組化程式設計模式
+  - 事件委託與防抖優化
+  - 動態 DOM 操作
+  - 現代通知系統
   - 錯誤處理機制
+  - Google Analytics 4 整合
 
 ### 設計特色
-- **One Dark Pro配色**：
-  - 主背景：#282c34 → #21252b 漸變
-  - 主要文字：#abb2bf
-  - 標題文字：#e5c07b
-  - 強調色彩：#61dafb, #c678dd, #98c379
+- **One Dark Pro配色方案**：
+  - 主背景：`#282c34` → `#21252b` 漸變
+  - 主要文字：`#abb2bf`
+  - 標題文字：`#e5c07b`
+  - 強調色彩：`#61dafb`, `#c678dd`, `#98c379`
 - **響應式設計**：支援 320px+ 所有裝置
-- **現代化UI**：卡片設計、陰影效果、圓角邊框
+- **現代化UI元素**：
+  - 卡片式設計系統
+  - 動態陰影效果
+  - 圓角邊框設計
+  - 流暢過渡動畫
 
-### 效能優化
-- ⚡ 純前端應用，無伺服器依賴
-- 🎯 防抖機制減少不必要計算
-- 📦 輕量級，總大小 < 1MB
-- 🔄 漸進式載入，提升使用者體驗
+### 效能優化策略
+- ⚡ **純前端應用**：無伺服器依賴，即開即用
+- 🎯 **防抖機制**：減少不必要的計算操作
+- 📦 **輕量級架構**：總檔案大小 < 2MB（含圖片）
+- 🔄 **漸進式載入**：優化使用者體驗
+- 🖼️ **圖片優化**：PNG 格式，適當壓縮比例
+
+### 瀏覽器相容性
+- ✅ Chrome 70+
+- ✅ Firefox 65+
+- ✅ Safari 12+
+- ✅ Edge 79+
 
 ## 📂 專案結構
 
 ```
 LineageW-Pet-Evaluator/
-├── index.html              # 主頁面
+├── index.html              # 主頁面（HTML5 語義化結構）
 ├── styles.css              # 樣式表（One Dark Pro主題）
-├── script.js               # 主要邏輯
-├── README.md               # 專案說明
-├── OrionKao.png           # 網站圖標
-├── wolf.png               # 狼圖片
-├── dubin.png              # 杜賓狗圖片
-├── sheepdog.png           # 牧羊犬圖片
-└── beagle.png             # 小獵犬圖片
+├── styles_backup.css       # 樣式備份檔案
+├── script.js               # 主要邏輯（ES6+ 模組化設計）
+├── README.md               # 專案說明文件
+├── license                 # MIT 授權條款
+├── .gitignore              # Git 忽略規則
+├── .vscode/                # VS Code 設定
+│   └── settings.json       # 編輯器設定
+├── assets/                 # 靜態資源
+│   ├── OrionKao.png        # 品牌圖標
+│   ├── wolf.png            # 狼寵物圖片
+│   ├── dubin.png           # 杜賓狗圖片
+│   ├── sheepdog.png        # 牧羊犬圖片
+│   └── beagle.png          # 小獵犬圖片
+└── .git/                   # Git 版本控制
 ```
+
+## 🎯 核心功能模組
+
+### 🐾 寵物資料系統
+- **寵物基礎資料**：`petData` 物件儲存四種寵物的完整資訊
+- **屬性對映**：`statNames` 提供中文屬性名稱轉換
+- **升級機率表**：`upgradeRates` 存放官方升級機率數據
+
+### 📊 計算引擎
+- **期望值計算**：`calculateExpectedStats()` 基於機率的理論值計算
+- **屬性分析**：`analyzeStats()` 多維度屬性評估算法
+- **角色加成**：`calculateCharacterBonus()` 遊戲內實際效益計算
+
+### 🎨 使用者介面
+- **響應式卡片系統**：動態寵物選擇介面
+- **現代通知機制**：`showNotification()` 替代傳統 alert
+- **分頁式說明**：模組化幫助系統
+
+### ⚡ 效能優化
+- **防抖函數**：`debounce()` 優化輸入響應
+- **事件委託**：減少事件監聽器數量
+- **動態載入**：按需顯示結果區塊
 
 ## 🎯 使用注意事項
 
@@ -188,16 +237,23 @@ LineageW-Pet-Evaluator/
 - **圖片不顯示**：確保寵物圖片檔案在正確位置
 - **計算異常**：檢查輸入值是否在合理範圍內
 - **樣式異常**：確認瀏覽器支援CSS3特性
-- **響應問題**：嘗試重新整理頁面
+- **響應問題**：嘗試重新整理頁面或清除快取
+
+### 🛡️ 隱私權政策
+- 本工具不收集任何個人資料
+- Google Analytics 4 僅用於匿名流量分析
+- 所有計算均在本地進行，不上傳至伺服器
 
 ## 📝 更新日誌
 
-### V2.1
-- **比較欄位增加期望值**
-- **增加GOOGLE Analytics 4 流量分析**
+### v2.1.0 (最新版本)
+- ✅ **GA4 分析整合**：新增 Google Analytics 4 流量分析
+- 🔧 **期望值欄位**：在分析表格中新增期望值比較
+- 🎨 **UI 微調**：優化視覺效果與使用者體驗
+- 📊 **數據優化**：改善計算精度與顯示格式
+- 🛡️ **錯誤處理**：加強輸入驗證與異常處理
 
-
-### v2.0.0 (最新版本)
+### v2.0.0
 - 🎨 **全新One Dark Pro主題**：現代化暗黑風格設計
 - 🖼️ **寵物圖片系統**：真實寵物圖片替代emoji
 - 🔧 **等級範圍調整**：由1-100改為1-15級
@@ -207,30 +263,50 @@ LineageW-Pet-Evaluator/
 - 🔔 **通知系統**：現代化提示訊息
 - 📖 **說明系統**：分頁式詳細說明
 - 🌐 **Favicon支援**：瀏覽器標籤圖示
-- 📊 **期望值顯示**：在分析表格中新增期望值欄位
 
 ### v1.1.0
-- 修正屬性名稱錯誤
-- 新增角色能力加成顯示
-- 積極性設為固定值3
-- 更新評價系統
+- 🔧 修正屬性名稱錯誤
+- ➕ 新增角色能力加成顯示
+- 📌 積極性設為固定值3
+- 📊 更新評價系統
 
 ### v1.0.0
-- 初始版本發布
-- 四種寵物類型支援
-- 基礎計算與評價系統
+- 🚀 初始版本發布
+- 🐾 四種寵物類型支援
+- 📊 基礎計算與評價系統
+
+## 🤝 貢獻指南
+
+歡迎提交 Issues 和 Pull Requests！
+
+### 開發環境設置
+```bash
+# 克隆專案
+git clone https://github.com/your-username/LineageW-Pet-Evaluator.git
+cd LineageW-Pet-Evaluator
+
+# 啟動開發伺服器
+python3 -m http.server 8000
+```
+
+### 提交規範
+- feat: 新功能
+- fix: 修復問題
+- docs: 文件更新
+- style: 樣式調整
+- refactor: 重構代碼
 
 ## 📄 授權條款
 
-本專案採用 MIT 授權條款 - 詳見 [LICENSE](LICENSE) 檔案
+本專案採用 MIT 授權條款 - 詳見 [LICENSE](license) 檔案
 
 ## 👨‍💻 作者資訊
 
-**Created by OrionKao**
+**Created by Orien**
 
-- 📧 Email: [聯絡信箱]
-- 🌐 GitHub: [GitHub連結]
 - 🎮 專為天堂W玩家設計
+- 💡 持續優化使用者體驗
+- 🌟 歡迎回饋與建議
 
 ---
 
@@ -238,4 +314,10 @@ LineageW-Pet-Evaluator/
 
 感謝天堂W官方提供的寵物升級機率數據，以及所有測試使用者的寶貴建議。
 
-**如果這個工具對您有幫助，歡迎給個 ⭐ Star！** 
+**如果這個工具對您有幫助，歡迎給個 ⭐ Star！**
+
+### 🔗 相關連結
+
+- [線上使用](https://your-domain.com)
+- [回報問題](https://github.com/your-username/LineageW-Pet-Evaluator/issues)
+- [功能建議](https://github.com/your-username/LineageW-Pet-Evaluator/discussions) 
