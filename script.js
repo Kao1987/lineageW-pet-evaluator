@@ -233,6 +233,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // 初始化公告欄位
+    initAnnouncementToggle();
 });
 
 // 更新基礎屬性顯示
@@ -524,5 +527,36 @@ function displayResults(pet, level, currentStats, expectedStats, analysis) {
 
 // 工具函數：格式化數字
 function formatNumber(num) {
-    return Math.round(num * 10) / 10;
+    return parseFloat(num.toFixed(1));
+}
+
+// 📢 公告欄位折疊功能
+function initAnnouncementToggle() {
+    const announcementToggle = document.getElementById('announcementToggle');
+    const announcementContent = document.getElementById('announcementContent');
+    
+    if (announcementToggle && announcementContent) {
+        // 檢查本地存儲的折疊狀態
+        const isCollapsed = localStorage.getItem('announcementCollapsed') === 'true';
+        if (isCollapsed) {
+            announcementToggle.classList.add('collapsed');
+            announcementContent.classList.add('collapsed');
+        }
+        
+        announcementToggle.addEventListener('click', function() {
+            const isCurrentlyCollapsed = announcementContent.classList.contains('collapsed');
+            
+            if (isCurrentlyCollapsed) {
+                // 展開
+                announcementToggle.classList.remove('collapsed');
+                announcementContent.classList.remove('collapsed');
+                localStorage.setItem('announcementCollapsed', 'false');
+            } else {
+                // 折疊
+                announcementToggle.classList.add('collapsed');
+                announcementContent.classList.add('collapsed');
+                localStorage.setItem('announcementCollapsed', 'true');
+            }
+        });
+    }
 }

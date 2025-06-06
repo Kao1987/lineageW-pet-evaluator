@@ -1131,7 +1131,240 @@ header h1 {
 }
 
 .help-tab-content h4 {
-    color: #61dafb;
+    color: #e06c75;
     margin: 15px 0 10px 0;
-    font-size: 1.1rem;
+    font-size: 1rem;
+}
+
+/* 📢 公告欄位樣式 */
+.announcement-section {
+    background: linear-gradient(135deg, #3e4451 0%, #282c34 100%);
+    border-radius: 15px;
+    margin-bottom: 30px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    border: 1px solid #56b6c2;
+    transition: all 0.3s ease;
+}
+
+.announcement-section:hover {
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px);
+    border-color: #61dafb;
+}
+
+.announcement-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none;
+    background: rgba(86, 182, 194, 0.1);
+}
+
+.announcement-header:hover {
+    background: rgba(86, 182, 194, 0.15);
+}
+
+.announcement-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #abb2bf;
+}
+
+.announcement-icon {
+    font-size: 1.3rem;
+    animation: pulse 2s infinite;
+    color: #61dafb;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+.announcement-title h3 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #e5c07b;
+}
+
+.announcement-badge {
+    background: #e06c75;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from { box-shadow: 0 0 5px rgba(224, 108, 117, 0.5); }
+    to { box-shadow: 0 0 15px rgba(224, 108, 117, 0.7); }
+}
+
+.toggle-arrow {
+    font-size: 1.2rem;
+    color: #56b6c2;
+    transition: transform 0.3s ease;
+    font-weight: bold;
+}
+
+.announcement-header.collapsed .toggle-arrow {
+    transform: rotate(-90deg);
+}
+
+.announcement-content {
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: max-height 0.4s ease-in-out, padding 0.3s ease;
+    background: rgba(40, 44, 52, 0.8);
+    backdrop-filter: blur(10px);
+    /* 自定義滾動條樣式 */
+    scrollbar-width: thin;
+    scrollbar-color: #56b6c2 rgba(62, 68, 81, 0.3);
+}
+
+/* Webkit 滾動條樣式 */
+.announcement-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.announcement-content::-webkit-scrollbar-track {
+    background: rgba(62, 68, 81, 0.3);
+    border-radius: 4px;
+}
+
+.announcement-content::-webkit-scrollbar-thumb {
+    background: #56b6c2;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+.announcement-content::-webkit-scrollbar-thumb:hover {
+    background: #61dafb;
+}
+
+.announcement-content.collapsed {
+    max-height: 0;
+    padding: 0 25px;
+    overflow: hidden;
+}
+
+.announcement-content:not(.collapsed) {
+    padding: 20px 25px;
+}
+
+/* 確保公告項目在滾動時有適當間距 */
+.announcement-item {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    padding: 15px;
+    background: rgba(62, 68, 81, 0.6);
+    border-radius: 10px;
+    border-left: 4px solid #56b6c2;
+    transition: all 0.3s ease;
+    /* 防止文字溢出 */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.announcement-item:last-child {
+    margin-bottom: 0;
+}
+
+.announcement-item:hover {
+    background: rgba(62, 68, 81, 0.8);
+    transform: translateX(5px);
+    border-left-color: #61dafb;
+}
+
+.announcement-date {
+    flex-shrink: 0;
+    color: #e5c07b;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 2px 8px;
+    background: rgba(86, 182, 194, 0.2);
+    border-radius: 15px;
+    white-space: nowrap;
+    height: fit-content;
+    border: 1px solid rgba(86, 182, 194, 0.3);
+}
+
+.announcement-text {
+    color: #abb2bf;
+    line-height: 1.5;
+    font-size: 0.95rem;
+    /* 確保長文字可以正確換行 */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-line;
+}
+
+.announcement-text strong {
+    color: #61dafb;
+    text-shadow: none;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .announcement-header {
+        padding: 15px 20px;
+    }
+    
+    .announcement-title h3 {
+        font-size: 1.1rem;
+    }
+    
+    .announcement-content {
+        max-height: 300px; /* 在手機上調低一些 */
+    }
+    
+    .announcement-content:not(.collapsed) {
+        padding: 15px 20px;
+    }
+    
+    .announcement-item {
+        flex-direction: column;
+        gap: 8px;
+        padding: 12px;
+    }
+    
+    .announcement-date {
+        align-self: flex-start;
+    }
+    
+    .announcement-text {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .announcement-title {
+        gap: 8px;
+    }
+    
+    .announcement-title h3 {
+        font-size: 1rem;
+    }
+    
+    .announcement-icon {
+        font-size: 1.1rem;
+    }
+    
+    .announcement-content {
+        max-height: 250px; /* 小螢幕進一步調低 */
+    }
+    
+    .announcement-content::-webkit-scrollbar {
+        width: 6px; /* 小螢幕上更細的滾動條 */
+    }
 } 
